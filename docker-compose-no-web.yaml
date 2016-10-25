@@ -1,0 +1,55 @@
+version: "2"
+
+services:
+  start_dependencies:
+    image: dadarek/wait-for-dependencies
+    depends_on:
+      - mongo
+      - rabbitmq
+    command: rabbitmq:5672 mongo:27017
+
+  api:
+    build: ./Coolector.Api/Coolector.Api
+    links:
+      - rabbitmq
+      - storage-service
+    ports:
+      - '5000:5000'
+
+  storage-service:
+    build: ./Coolector.Services.Storage/Coolector.Services.Storage
+    links:
+      - mongo
+      - rabbitmq
+      - users-service
+      - remarks-service
+    ports:
+      - '10000:10000'  
+
+  users-service:
+    build: ./Coolector.Services.Users/Coolector.Services.Users
+    links:
+      - mongo
+      - rabbitmq
+    ports:
+      - '10001:10001'
+
+  remarks-service:
+    build: ./Coolector.Services.Remarks/Coolector.Services.Remarks
+    links:
+      - mongo
+      - rabbitmq
+    ports:
+      - '10002:10002'    
+
+  mongo:
+    image: mongo
+    volumes:
+      - ./data/db:/data/db
+    ports:
+      - '27017:27017'
+
+  rabbitmq:
+    image: rabbitmq:3.6.5-management
+    ports:
+      - '5672:5672'
