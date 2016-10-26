@@ -6,7 +6,7 @@ services:
     depends_on:
       - mongo
       - rabbitmq
-    command: rabbitmq:5672 mongo:27017
+    command: rabbitmq:5672
 
   api:
     build: ./Coolector.Api/Coolector.Api
@@ -24,7 +24,7 @@ services:
       - users-service
       - remarks-service
     ports:
-      - '10000:10000'  
+      - '10000:10000'
 
   users-service:
     build: ./Coolector.Services.Users/Coolector.Services.Users
@@ -40,7 +40,7 @@ services:
       - mongo
       - rabbitmq
     ports:
-      - '10002:10002'    
+      - '10002:10002'
 
   mongo:
     image: mongo

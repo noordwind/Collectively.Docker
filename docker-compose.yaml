@@ -6,7 +6,7 @@ services:
     depends_on:
       - mongo
       - rabbitmq
-    command: rabbitmq:5672 mongo:27017
+    command: rabbitmq:5672
 
   api:
     build: ./Coolector.Api/Coolector.Api
