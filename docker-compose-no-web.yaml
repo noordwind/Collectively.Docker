@@ -53,3 +53,4 @@ services:
     image: rabbitmq:3.6.5-management
     ports:
       - '5672:5672'
+      - '15672:15672'
