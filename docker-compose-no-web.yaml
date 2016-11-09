@@ -23,6 +23,7 @@ services:
       - rabbitmq
       - users-service
       - remarks-service
+      - operations-service
     ports:
       - '10000:10000'
 
@@ -41,6 +42,14 @@ services:
       - rabbitmq
     ports:
       - '10002:10002'
+
+  operations-service:
+    build: ./Coolector.Services.Operations/Coolector.Services.Operations
+    links:
+      - mongo
+      - rabbitmq
+    ports:
+      - '10010:10010'
 
   mongo:
     image: mongo
