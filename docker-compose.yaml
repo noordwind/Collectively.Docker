@@ -51,10 +51,18 @@ services:
     ports:
       - '10010:10010'
 
+  signalr-service:
+    build: ./Coolector.Services.SignalR/Coolector.Services.SignalR
+    links:
+      - rabbitmq
+    ports:
+      - '15000:15000' 
+
   web:
     build: ./Coolector.Web
     links:
       - api
+      - signalr-service
     ports:
       - '9000:9000'
 

@@ -35,14 +35,6 @@ services:
     ports:
       - '10001:10001'
 
-  remarks-service:
-    build: ./Coolector.Services.Remarks/Coolector.Services.Remarks
-    links:
-      - mongo
-      - rabbitmq
-    ports:
-      - '10002:10002'
-
   operations-service:
     build: ./Coolector.Services.Operations/Coolector.Services.Operations
     links:
@@ -51,10 +43,25 @@ services:
     ports:
       - '10010:10010'
 
+  remarks-service:
+    build: ./Coolector.Services.Remarks/Coolector.Services.Remarks
+    links:
+      - mongo
+      - rabbitmq
+    ports:
+      - '10002:10002'
+
+  signalr-service:
+    build: ./Coolector.Services.SignalR/Coolector.Services.SignalR
+    links:
+      - rabbitmq
+    ports:
+      - '15000:15000'     
+
   mongo:
     image: mongo
     volumes:
-      - ./data/db:/data/db
+      - ./data/mongo:/data/mongo
     ports:
       - '27017:27017'
 
