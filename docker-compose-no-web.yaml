@@ -43,6 +43,14 @@ services:
     ports:
       - '10010:10010'
 
+  mailing-service:
+    build: ./Coolector.Services.Mailing/Coolector.Services.Mailing
+    links:
+      - mongo
+      - rabbitmq
+    ports:
+      - '10020:10020' 
+
   remarks-service:
     build: ./Coolector.Services.Remarks/Coolector.Services.Remarks
     links:
