@@ -49,7 +49,7 @@ services:
       - mongo
       - rabbitmq
     ports:
-      - '10020:10020' 
+      - '10005:10005' 
 
   remarks-service:
     build: ./Coolector.Services.Remarks/Coolector.Services.Remarks

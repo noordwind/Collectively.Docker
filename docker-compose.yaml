@@ -57,7 +57,7 @@ services:
       - mongo
       - rabbitmq
     ports:
-      - '10020:10020'     
+      - '10005:10005'     
 
   signalr-service:
     build: ./Coolector.Services.SignalR/Coolector.Services.SignalR
