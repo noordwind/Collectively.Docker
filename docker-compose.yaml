@@ -24,6 +24,7 @@ services:
       - users-service
       - remarks-service
       - operations-service
+      - statistics-service
     ports:
       - '10000:10000'  
 
