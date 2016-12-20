@@ -64,7 +64,15 @@ services:
     links:
       - rabbitmq
     ports:
-      - '15000:15000' 
+      - '15000:15000'
+
+  statistics-service:
+    build: ./Coolector.Services.Statistics/Coolector.Services.Statistics
+    links:
+      - mongo
+      - rabbitmq
+    ports:
+      - '10006:10006'  
 
   web:
     build: ./Coolector.Web
