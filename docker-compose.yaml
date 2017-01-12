@@ -75,6 +75,22 @@ services:
     ports:
       - '10006:10006'  
 
+  supervisor-service:
+    build: ./Coolector.Services.Supervisor/Coolector.Services.Supervisor
+    links:
+      - mongo
+      - rabbitmq
+      - api
+      - mailing-service
+      - operations-service
+      - remarks-service
+      - signalr-service
+      - statistics-service
+      - storage-service
+      - users-service
+    ports:
+      - '11000:11000'
+
   web:
     build: ./Coolector.Web
     links:
