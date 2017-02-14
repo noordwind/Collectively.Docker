@@ -52,6 +52,14 @@ services:
     ports:
       - '10010:10010'
 
+  medium-service:
+    build: ./Coolector.Services.Medium/Coolector.Services.Medium
+    links:
+      - mongo
+      - rabbitmq
+    ports:
+      - '11100:11100'
+
   mailing-service:
     build: ./Coolector.Services.Mailing/Coolector.Services.Mailing
     links:
@@ -82,6 +90,7 @@ services:
       - rabbitmq
       - api
       - mailing-service
+      - medium-service
       - operations-service
       - remarks-service
       - signalr-service
