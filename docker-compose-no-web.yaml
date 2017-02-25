@@ -9,7 +9,7 @@ services:
     command: rabbitmq:5672
 
   api:
-    build: ./Coolector.Api/Coolector.Api
+    image: noordwind/coolector.api
     links:
       - rabbitmq
       - storage-service
@@ -17,7 +17,7 @@ services:
       - '5000:5000'
 
   storage-service:
-    build: ./Coolector.Services.Storage/Coolector.Services.Storage
+    image: noordwind/coolector.services.storage
     links:
       - mongo
       - rabbitmq
@@ -26,57 +26,57 @@ services:
       - operations-service
       - statistics-service
     ports:
-      - '10000:10000'
+      - '10000:10000'  
 
   users-service:
-    build: ./Coolector.Services.Users/Coolector.Services.Users
+    image: noordwind/coolector.services.users
     links:
       - mongo
       - rabbitmq
     ports:
       - '10001:10001'
 
+  remarks-service:
+    image: noordwind/coolector.services.remarks
+    links:
+      - mongo
+      - rabbitmq
+    ports:
+      - '10002:10002'    
+
   operations-service:
-    build: ./Coolector.Services.Operations/Coolector.Services.Operations
+    image: noordwind/coolector.services.operations
     links:
       - mongo
       - rabbitmq
     ports:
       - '10010:10010'
 
-  mailing-service:
-    build: ./Coolector.Services.Mailing/Coolector.Services.Mailing
-    links:
-      - mongo
-      - rabbitmq
-    ports:
-      - '10005:10005' 
-
   medium-service:
-    build: ./Coolector.Services.Medium/Coolector.Services.Medium
+    image: noordwind/coolector.services.medium
     links:
       - mongo
       - rabbitmq
     ports:
-      - '11100:11100' 
+      - '11100:11100'
 
-  remarks-service:
-    build: ./Coolector.Services.Remarks/Coolector.Services.Remarks
+  mailing-service:
+    image: noordwind/coolector.services.mailing
     links:
       - mongo
       - rabbitmq
     ports:
-      - '10002:10002'
+      - '10005:10005'     
 
   signalr-service:
-    build: ./Coolector.Services.SignalR/Coolector.Services.SignalR
+    image: noordwind/coolector.services.signalr
     links:
       - rabbitmq
     ports:
       - '15000:15000'
 
   statistics-service:
-    build: ./Coolector.Services.Statistics/Coolector.Services.Statistics
+    image: noordwind/coolector.services.statistics
     links:
       - mongo
       - rabbitmq
@@ -84,7 +84,7 @@ services:
       - '10006:10006'  
 
   supervisor-service:
-    build: ./Coolector.Services.Supervisor/Coolector.Services.Supervisor
+    image: noordwind/coolector.services.supervisor
     links:
       - mongo
       - rabbitmq
@@ -103,7 +103,7 @@ services:
   mongo:
     image: mongo
     volumes:
-      - ./data/mongo:/data/mongo
+      - ./data/db:/data/db
     ports:
       - '27017:27017'
 

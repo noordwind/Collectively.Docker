@@ -9,7 +9,7 @@ services:
     command: rabbitmq:5672
 
   api:
-    image: noordwind/coolector.api
+    build: ./Coolector.Api/Coolector.Api
     links:
       - rabbitmq
       - storage-service
@@ -17,7 +17,7 @@ services:
       - '5000:5000'
 
   storage-service:
-    image: noordwind/coolector.services.storage
+    build: ./Coolector.Services.Storage/Coolector.Services.Storage
     links:
       - mongo
       - rabbitmq
@@ -29,7 +29,7 @@ services:
       - '10000:10000'  
 
   users-service:
-    image: noordwind/coolector.services.users
+    build: ./Coolector.Services.Users/Coolector.Services.Users
     links:
       - mongo
       - rabbitmq
@@ -37,7 +37,7 @@ services:
       - '10001:10001'
 
   remarks-service:
-    image: noordwind/coolector.services.remarks
+    build: ./Coolector.Services.Remarks/Coolector.Services.Remarks
     links:
       - mongo
       - rabbitmq
@@ -45,7 +45,7 @@ services:
       - '10002:10002'    
 
   operations-service:
-    image: noordwind/coolector.services.operations
+    build: ./Coolector.Services.Operations/Coolector.Services.Operations
     links:
       - mongo
       - rabbitmq
@@ -53,7 +53,7 @@ services:
       - '10010:10010'
 
   medium-service:
-    image: noordwind/coolector.services.medium
+    build: ./Coolector.Services.Medium/Coolector.Services.Medium
     links:
       - mongo
       - rabbitmq
@@ -61,7 +61,7 @@ services:
       - '11100:11100'
 
   mailing-service:
-    image: noordwind/coolector.services.mailing
+    build: ./Coolector.Services.Mailing/Coolector.Services.Mailing
     links:
       - mongo
       - rabbitmq
@@ -69,14 +69,14 @@ services:
       - '10005:10005'     
 
   signalr-service:
-    image: noordwind/coolector.services.signalr
+    build: ./Coolector.Services.SignalR/Coolector.Services.SignalR
     links:
       - rabbitmq
     ports:
       - '15000:15000'
 
   statistics-service:
-    image: noordwind/coolector.services.statistics
+    build: ./Coolector.Services.Statistics/Coolector.Services.Statistics
     links:
       - mongo
       - rabbitmq
@@ -84,7 +84,7 @@ services:
       - '10006:10006'  
 
   supervisor-service:
-    image: noordwind/coolector.services.supervisor
+    build: ./Coolector.Services.Supervisor/Coolector.Services.Supervisor
     links:
       - mongo
       - rabbitmq
@@ -101,7 +101,7 @@ services:
       - '11000:11000'
 
   web:
-    image: noordwind/coolector.web
+    build: ./Coolector.Web
     links:
       - api
       - signalr-service
