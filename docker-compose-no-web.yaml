@@ -9,7 +9,7 @@ services:
     command: rabbitmq:5672
 
   api:
-    image: noordwind/coolector.api
+    image: noordwind/collectively.api
     links:
       - rabbitmq
       - storage-service
@@ -17,7 +17,7 @@ services:
       - '5000:5000'
 
   storage-service:
-    image: noordwind/coolector.services.storage
+    image: noordwind/collectively.services.storage
     links:
       - mongo
       - rabbitmq
@@ -29,7 +29,7 @@ services:
       - '10000:10000'  
 
   users-service:
-    image: noordwind/coolector.services.users
+    image: noordwind/collectively.services.users
     links:
       - mongo
       - rabbitmq
@@ -37,7 +37,7 @@ services:
       - '10001:10001'
 
   remarks-service:
-    image: noordwind/coolector.services.remarks
+    image: noordwind/collectively.services.remarks
     links:
       - mongo
       - rabbitmq
@@ -45,7 +45,7 @@ services:
       - '10002:10002'    
 
   operations-service:
-    image: noordwind/coolector.services.operations
+    image: noordwind/collectively.services.operations
     links:
       - mongo
       - rabbitmq
@@ -53,7 +53,7 @@ services:
       - '10010:10010'
 
   medium-service:
-    image: noordwind/coolector.services.medium
+    image: noordwind/collectively.services.medium
     links:
       - mongo
       - rabbitmq
@@ -61,22 +61,15 @@ services:
       - '11100:11100'
 
   mailing-service:
-    image: noordwind/coolector.services.mailing
+    image: noordwind/collectively.services.mailing
     links:
       - mongo
       - rabbitmq
     ports:
       - '10005:10005'     
 
-  signalr-service:
-    image: noordwind/coolector.services.signalr
-    links:
-      - rabbitmq
-    ports:
-      - '15000:15000'
-
   statistics-service:
-    image: noordwind/coolector.services.statistics
+    image: noordwind/collectively.services.statistics
     links:
       - mongo
       - rabbitmq
@@ -84,7 +77,7 @@ services:
       - '10006:10006'  
 
   supervisor-service:
-    image: noordwind/coolector.services.supervisor
+    image: noordwind/collectively.services.supervisor
     links:
       - mongo
       - rabbitmq
@@ -93,7 +86,6 @@ services:
       - medium-service
       - operations-service
       - remarks-service
-      - signalr-service
       - statistics-service
       - storage-service
       - users-service

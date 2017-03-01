@@ -9,7 +9,7 @@ services:
     command: rabbitmq:5672
 
   api:
-    build: ./Coolector.Api/Coolector.Api
+    build: ./Collectively.Api/Collectively.Api
     links:
       - rabbitmq
       - storage-service
@@ -17,7 +17,7 @@ services:
       - '5000:5000'
 
   storage-service:
-    build: ./Coolector.Services.Storage/Coolector.Services.Storage
+    build: ./Collectively.Services.Storage/Collectively.Services.Storage
     links:
       - mongo
       - rabbitmq
@@ -29,7 +29,7 @@ services:
       - '10000:10000'  
 
   users-service:
-    build: ./Coolector.Services.Users/Coolector.Services.Users
+    build: ./Collectively.Services.Users/Collectively.Services.Users
     links:
       - mongo
       - rabbitmq
@@ -37,7 +37,7 @@ services:
       - '10001:10001'
 
   remarks-service:
-    build: ./Coolector.Services.Remarks/Coolector.Services.Remarks
+    build: ./Collectively.Services.Remarks/Collectively.Services.Remarks
     links:
       - mongo
       - rabbitmq
@@ -45,7 +45,7 @@ services:
       - '10002:10002'    
 
   operations-service:
-    build: ./Coolector.Services.Operations/Coolector.Services.Operations
+    build: ./Collectively.Services.Operations/Collectively.Services.Operations
     links:
       - mongo
       - rabbitmq
@@ -53,7 +53,7 @@ services:
       - '10010:10010'
 
   medium-service:
-    build: ./Coolector.Services.Medium/Coolector.Services.Medium
+    build: ./Collectively.Services.Medium/Collectively.Services.Medium
     links:
       - mongo
       - rabbitmq
@@ -61,22 +61,15 @@ services:
       - '11100:11100'
 
   mailing-service:
-    build: ./Coolector.Services.Mailing/Coolector.Services.Mailing
+    build: ./Collectively.Services.Mailing/Collectively.Services.Mailing
     links:
       - mongo
       - rabbitmq
     ports:
       - '10005:10005'     
 
-  signalr-service:
-    build: ./Coolector.Services.SignalR/Coolector.Services.SignalR
-    links:
-      - rabbitmq
-    ports:
-      - '15000:15000'
-
   statistics-service:
-    build: ./Coolector.Services.Statistics/Coolector.Services.Statistics
+    build: ./Collectively.Services.Statistics/Collectively.Services.Statistics
     links:
       - mongo
       - rabbitmq
@@ -84,7 +77,7 @@ services:
       - '10006:10006'  
 
   supervisor-service:
-    build: ./Coolector.Services.Supervisor/Coolector.Services.Supervisor
+    build: ./Collectively.Services.Supervisor/Collectively.Services.Supervisor
     links:
       - mongo
       - rabbitmq
@@ -93,7 +86,6 @@ services:
       - medium-service
       - operations-service
       - remarks-service
-      - signalr-service
       - statistics-service
       - storage-service
       - users-service
@@ -101,10 +93,9 @@ services:
       - '11000:11000'
 
   web:
-    build: ./Coolector.Web
+    build: ./Collectively.Web
     links:
       - api
-      - signalr-service
     ports:
       - '9000:9000'
 
