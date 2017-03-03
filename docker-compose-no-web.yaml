@@ -92,6 +92,13 @@ services:
     ports:
       - '11000:11000'
 
+  websockets-service:
+    image: noordwind/collectively.services.websockets
+    links:
+      - rabbitmq
+    ports:
+      - '15000:15000'
+
   mongo:
     image: mongo
     volumes:

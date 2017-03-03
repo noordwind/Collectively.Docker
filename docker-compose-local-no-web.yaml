@@ -92,6 +92,13 @@ services:
     ports:
       - '11000:11000'
 
+  websockets-service:
+    build: ./Collectively.Services.Websockets/src
+    links:
+      - rabbitmq
+    ports:
+      - '15000:15000'
+
   mongo:
     image: mongo
     volumes:
