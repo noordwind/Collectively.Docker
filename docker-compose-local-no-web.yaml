@@ -25,6 +25,7 @@ services:
       - remarks-service
       - operations-service
       - statistics-service
+      - notifications-service
     ports:
       - '10000:10000'
 
@@ -59,6 +60,14 @@ services:
       - rabbitmq
     ports:
       - '11100:11100' 
+
+  notifications-service:
+    image: ./Collectively.Services.Notifications/Collectively.Services.Notifications
+    links:
+      - mongo
+      - rabbitmq
+    ports:
+      - '10007:10007'
 
   remarks-service:
     build: ./Collectively.Services.Remarks/Collectively.Services.Remarks

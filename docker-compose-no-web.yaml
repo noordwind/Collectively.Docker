@@ -25,6 +25,7 @@ services:
       - remarks-service
       - operations-service
       - statistics-service
+      - notifications-service
     ports:
       - '10000:10000'  
 
@@ -66,7 +67,15 @@ services:
       - mongo
       - rabbitmq
     ports:
-      - '10005:10005'     
+      - '10005:10005'
+
+  notifications-service:
+    image: noordwind/collectively.services.notifications
+    links:
+      - mongo
+      - rabbitmq
+    ports:
+      - '10007:10007'  
 
   statistics-service:
     image: noordwind/collectively.services.statistics
