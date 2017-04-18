@@ -62,7 +62,7 @@ services:
       - '11100:11100' 
 
   notifications-service:
-    image: ./Collectively.Services.Notifications/Collectively.Services.Notifications
+    build: ./Collectively.Services.Notifications/Collectively.Services.Notifications
     links:
       - mongo
       - rabbitmq

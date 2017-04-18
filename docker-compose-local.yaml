@@ -70,7 +70,7 @@ services:
       - '10005:10005'
 
   notifications-service:
-    image: ./Collectively.Services.Notifications/Collectively.Services.Notifications
+    build: ./Collectively.Services.Notifications/Collectively.Services.Notifications
     links:
       - mongo
       - rabbitmq
