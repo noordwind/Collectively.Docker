@@ -35,7 +35,7 @@ services:
       - mongo
       - rabbitmq
     ports:
-      - '10001:10001'
+      - '10002:10002'
 
   remarks-service:
     image: noordwind/collectively.services.remarks
@@ -43,7 +43,7 @@ services:
       - mongo
       - rabbitmq
     ports:
-      - '10002:10002'    
+      - '10003:10003'    
 
   operations-service:
     image: noordwind/collectively.services.operations
@@ -51,7 +51,7 @@ services:
       - mongo
       - rabbitmq
     ports:
-      - '10010:10010'
+      - '10001:10001'
 
   medium-service:
     image: noordwind/collectively.services.medium
@@ -59,7 +59,7 @@ services:
       - mongo
       - rabbitmq
     ports:
-      - '11100:11100'
+      - '11000:11000'
 
   mailing-service:
     image: noordwind/collectively.services.mailing
@@ -67,7 +67,7 @@ services:
       - mongo
       - rabbitmq
     ports:
-      - '10005:10005'
+      - '10006:10006'
 
   notifications-service:
     image: noordwind/collectively.services.notifications
@@ -75,7 +75,7 @@ services:
       - mongo
       - rabbitmq
     ports:
-      - '10007:10007'    
+      - '10005:10005'    
 
   statistics-service:
     image: noordwind/collectively.services.statistics
@@ -83,7 +83,7 @@ services:
       - mongo
       - rabbitmq
     ports:
-      - '10006:10006'  
+      - '10004:10004'  
 
   supervisor-service:
     image: noordwind/collectively.services.supervisor
@@ -99,14 +99,14 @@ services:
       - storage-service
       - users-service
     ports:
-      - '11000:11000'
+      - '11001:11001'
 
   websockets-service:
     image: noordwind/collectively.services.websockets
     links:
       - rabbitmq
     ports:
-      - '15000:15000'
+      - '9050:9050'
 
   web:
     image: noordwind/collectively.web
