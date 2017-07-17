@@ -99,7 +99,7 @@ services:
       - storage-service
       - users-service
     ports:
-      - '11000:11000'
+      - '11001:11001'
 
   websockets-service:
     build: ./Collectively.Services.Websockets/src
