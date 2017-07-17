@@ -9,7 +9,7 @@ services:
     command: rabbitmq:5672
 
   api:
-    build: ./Collectively.Api/Collectively.Api
+    build: ./Collectively.Api/src/Collectively.Api
     links:
       - rabbitmq
       - storage-service
@@ -17,7 +17,7 @@ services:
       - '5000:5000'
 
   storage-service:
-    build: ./Collectively.Services.Storage/Collectively.Services.Storage
+    build: ./Collectively.Services.Storage/src/Collectively.Services.Storage
     links:
       - mongo
       - rabbitmq
@@ -30,7 +30,7 @@ services:
       - '10000:10000'  
 
   users-service:
-    build: ./Collectively.Services.Users/Collectively.Services.Users
+    build: ./Collectively.Services.Users/src/Collectively.Services.Users
     links:
       - mongo
       - rabbitmq
@@ -38,7 +38,7 @@ services:
       - '10002:10002'
 
   remarks-service:
-    build: ./Collectively.Services.Remarks/Collectively.Services.Remarks
+    build: ./Collectively.Services.Remarks/src/Collectively.Services.Remarks
     links:
       - mongo
       - rabbitmq
@@ -46,7 +46,7 @@ services:
       - '10003:10003'    
 
   operations-service:
-    build: ./Collectively.Services.Operations/Collectively.Services.Operations
+    build: ./Collectively.Services.Operations/src/Collectively.Services.Operations
     links:
       - mongo
       - rabbitmq
@@ -54,7 +54,7 @@ services:
       - '10001:10001'
 
   medium-service:
-    build: ./Collectively.Services.Medium/Collectively.Services.Medium
+    build: ./Collectively.Services.Medium/src/Collectively.Services.Medium
     links:
       - mongo
       - rabbitmq
@@ -62,7 +62,7 @@ services:
       - '11000:11000'
 
   mailing-service:
-    build: ./Collectively.Services.Mailing/Collectively.Services.Mailing
+    build: ./Collectively.Services.Mailing/src/Collectively.Services.Mailing
     links:
       - mongo
       - rabbitmq
@@ -70,7 +70,7 @@ services:
       - '10006:10006'
 
   notifications-service:
-    build: ./Collectively.Services.Notifications/Collectively.Services.Notifications
+    build: ./Collectively.Services.Notifications/src/Collectively.Services.Notifications
     links:
       - mongo
       - rabbitmq
@@ -78,7 +78,7 @@ services:
       - '10005:10005'      
 
   statistics-service:
-    build: ./Collectively.Services.Statistics/Collectively.Services.Statistics
+    build: ./Collectively.Services.Statistics/src/Collectively.Services.Statistics
     links:
       - mongo
       - rabbitmq
@@ -86,7 +86,7 @@ services:
       - '10004:10004'  
 
   supervisor-service:
-    build: ./Collectively.Services.Supervisor/Collectively.Services.Supervisor
+    build: ./Collectively.Services.Supervisor/src/Collectively.Services.Supervisor
     links:
       - mongo
       - rabbitmq
