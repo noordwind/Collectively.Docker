@@ -12,15 +12,23 @@ services:
     image: noordwind/collectively.api
     links:
       - rabbitmq
+      - lockbox
       - storage-service
     ports:
       - '5000:5000'
+    environment:
+    - LOCKBOX_API_KEY=YOUR_LOCKBOX_API_KEY
+    - 'LOCKBOX_API_URL=http://lockbox:12000'
+    - LOCKBOX_BOX_NAME=api
+    - LOCKBOX_ENCRYPTION_KEY=YOUR_LOCKBOX_ENCRYPTION_KEY
+    - LOCKBOX_ENTRY_KEY=appsettings
 
   storage-service:
     image: noordwind/collectively.services.storage
     links:
       - mongo
       - rabbitmq
+      - lockbox
       - users-service
       - remarks-service
       - operations-service
@@ -28,68 +36,124 @@ services:
       - notifications-service
     ports:
       - '10000:10000'  
+    environment:
+    - LOCKBOX_API_KEY=YOUR_LOCKBOX_API_KEY
+    - 'LOCKBOX_API_URL=http://lockbox:12000'
+    - LOCKBOX_BOX_NAME=storage-service
+    - LOCKBOX_ENCRYPTION_KEY=YOUR_LOCKBOX_ENCRYPTION_KEY
+    - LOCKBOX_ENTRY_KEY=appsettings
 
   users-service:
     image: noordwind/collectively.services.users
     links:
       - mongo
       - rabbitmq
+      - lockbox
     ports:
       - '10002:10002'
+    environment:
+    - LOCKBOX_API_KEY=YOUR_LOCKBOX_API_KEY
+    - 'LOCKBOX_API_URL=http://lockbox:12000'
+    - LOCKBOX_BOX_NAME=users-service
+    - LOCKBOX_ENCRYPTION_KEY=YOUR_LOCKBOX_ENCRYPTION_KEY
+    - LOCKBOX_ENTRY_KEY=appsettings
 
   remarks-service:
     image: noordwind/collectively.services.remarks
     links:
       - mongo
       - rabbitmq
+      - lockbox
     ports:
       - '10003:10003'    
+    environment:
+    - LOCKBOX_API_KEY=YOUR_LOCKBOX_API_KEY
+    - 'LOCKBOX_API_URL=http://lockbox:12000'
+    - LOCKBOX_BOX_NAME=remarks-service
+    - LOCKBOX_ENCRYPTION_KEY=YOUR_LOCKBOX_ENCRYPTION_KEY
+    - LOCKBOX_ENTRY_KEY=appsettings
 
   operations-service:
     image: noordwind/collectively.services.operations
     links:
       - mongo
       - rabbitmq
+      - lockbox
     ports:
       - '10001:10001'
+    environment:
+    - LOCKBOX_API_KEY=YOUR_LOCKBOX_API_KEY
+    - 'LOCKBOX_API_URL=http://lockbox:12000'
+    - LOCKBOX_BOX_NAME=operations-service
+    - LOCKBOX_ENCRYPTION_KEY=YOUR_LOCKBOX_ENCRYPTION_KEY
+    - LOCKBOX_ENTRY_KEY=appsettings
 
   medium-service:
     image: noordwind/collectively.services.medium
     links:
       - mongo
       - rabbitmq
+      - lockbox
     ports:
       - '11000:11000'
+    environment:
+    - LOCKBOX_API_KEY=YOUR_LOCKBOX_API_KEY
+    - 'LOCKBOX_API_URL=http://lockbox:12000'
+    - LOCKBOX_BOX_NAME=medium-service
+    - LOCKBOX_ENCRYPTION_KEY=YOUR_LOCKBOX_ENCRYPTION_KEY
+    - LOCKBOX_ENTRY_KEY=appsettings
 
   mailing-service:
     image: noordwind/collectively.services.mailing
     links:
       - mongo
       - rabbitmq
+      - lockbox
     ports:
       - '10006:10006'
+    environment:
+    - LOCKBOX_API_KEY=YOUR_LOCKBOX_API_KEY
+    - 'LOCKBOX_API_URL=http://lockbox:12000'
+    - LOCKBOX_BOX_NAME=mailing-service
+    - LOCKBOX_ENCRYPTION_KEY=YOUR_LOCKBOX_ENCRYPTION_KEY
+    - LOCKBOX_ENTRY_KEY=appsettings
 
   notifications-service:
     image: noordwind/collectively.services.notifications
     links:
       - mongo
       - rabbitmq
+      - lockbox
     ports:
       - '10005:10005'    
+    environment:
+    - LOCKBOX_API_KEY=YOUR_LOCKBOX_API_KEY
+    - 'LOCKBOX_API_URL=http://lockbox:12000'
+    - LOCKBOX_BOX_NAME=notifications-service
+    - LOCKBOX_ENCRYPTION_KEY=YOUR_LOCKBOX_ENCRYPTION_KEY
+    - LOCKBOX_ENTRY_KEY=appsettings
 
   statistics-service:
     image: noordwind/collectively.services.statistics
     links:
       - mongo
       - rabbitmq
+      - lockbox
     ports:
       - '10004:10004'  
+    environment:
+    - LOCKBOX_API_KEY=YOUR_LOCKBOX_API_KEY
+    - 'LOCKBOX_API_URL=http://lockbox:12000'
+    - LOCKBOX_BOX_NAME=statistics-service
+    - LOCKBOX_ENCRYPTION_KEY=YOUR_LOCKBOX_ENCRYPTION_KEY
+    - LOCKBOX_ENTRY_KEY=appsettings
 
   supervisor-service:
     image: noordwind/collectively.services.supervisor
     links:
       - mongo
       - rabbitmq
+      - lockbox
       - api
       - mailing-service
       - medium-service
@@ -100,13 +164,26 @@ services:
       - users-service
     ports:
       - '11001:11001'
+    environment:
+    - LOCKBOX_API_KEY=YOUR_LOCKBOX_API_KEY
+    - 'LOCKBOX_API_URL=http://lockbox:12000'
+    - LOCKBOX_BOX_NAME=supervisor-service
+    - LOCKBOX_ENCRYPTION_KEY=YOUR_LOCKBOX_ENCRYPTION_KEY
+    - LOCKBOX_ENTRY_KEY=appsettings
 
   websockets-service:
     image: noordwind/collectively.services.websockets
     links:
       - rabbitmq
+      - lockbox
     ports:
       - '9050:9050'
+    environment:
+    - LOCKBOX_API_KEY=YOUR_LOCKBOX_API_KEY
+    - 'LOCKBOX_API_URL=http://lockbox:12000'
+    - LOCKBOX_BOX_NAME=websockets-service
+    - LOCKBOX_ENCRYPTION_KEY=YOUR_LOCKBOX_ENCRYPTION_KEY
+    - LOCKBOX_ENTRY_KEY=appsettings
 
   web:
     image: noordwind/collectively.web
@@ -116,10 +193,22 @@ services:
     ports:
       - '9000:9000'
 
+  lockbox:
+    image: lockbox/lockbox.server
+    links:
+      - mongo
+    ports:
+      - '12000:12000'
+    environment:
+      - 'ASPNETCORE_URLS=http://*:12000'
+      - 'LOCKBOX_MONGO_CONNECTION_STRING=mongodb://mongo:27017/Lockbox'
+      - LOCKBOX_MONGO_DATABASE=Lockbox
+      - LOCKBOX_SECRET_KEY=YOUR_LOCKBOX_SECRET_KEY
+
   mongo:
     image: mongo
     volumes:
-      - ./data/db:/data/db
+      - /data/db
     ports:
       - '27017:27017'
 
