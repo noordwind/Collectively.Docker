@@ -1,4 +1,7 @@
-# Collectively.Docker
+![Collectively](https://github.com/noordwind/Collectively/blob/master/assets/collectively_logo.png)
+
+----------------
+
 
 **Let's go for the better, Collectively​​.**
 ----------------

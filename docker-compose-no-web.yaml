@@ -17,7 +17,7 @@ services:
     ports:
       - '5000:5000'
     environment:
-    - LOCKBOX_API_KEY=YOUR_LOCKBOX_API_KEY
+    - 'LOCKBOX_API_KEY=YOUR_LOCKBOX_API_KEY'
     - 'LOCKBOX_API_URL=http://lockbox:12000'
     - LOCKBOX_BOX_NAME=api
     - LOCKBOX_ENCRYPTION_KEY=YOUR_LOCKBOX_ENCRYPTION_KEY
@@ -37,7 +37,7 @@ services:
     ports:
       - '10000:10000'  
     environment:
-    - LOCKBOX_API_KEY=YOUR_LOCKBOX_API_KEY
+    - 'LOCKBOX_API_KEY=YOUR_LOCKBOX_API_KEY'
     - 'LOCKBOX_API_URL=http://lockbox:12000'
     - LOCKBOX_BOX_NAME=storage-service
     - LOCKBOX_ENCRYPTION_KEY=YOUR_LOCKBOX_ENCRYPTION_KEY
@@ -52,7 +52,7 @@ services:
     ports:
       - '10002:10002'
     environment:
-    - LOCKBOX_API_KEY=YOUR_LOCKBOX_API_KEY
+    - 'LOCKBOX_API_KEY=YOUR_LOCKBOX_API_KEY'
     - 'LOCKBOX_API_URL=http://lockbox:12000'
     - LOCKBOX_BOX_NAME=users-service
     - LOCKBOX_ENCRYPTION_KEY=YOUR_LOCKBOX_ENCRYPTION_KEY
@@ -67,7 +67,7 @@ services:
     ports:
       - '10003:10003'    
     environment:
-    - LOCKBOX_API_KEY=YOUR_LOCKBOX_API_KEY
+    - 'LOCKBOX_API_KEY=YOUR_LOCKBOX_API_KEY'
     - 'LOCKBOX_API_URL=http://lockbox:12000'
     - LOCKBOX_BOX_NAME=remarks-service
     - LOCKBOX_ENCRYPTION_KEY=YOUR_LOCKBOX_ENCRYPTION_KEY
@@ -82,7 +82,7 @@ services:
     ports:
       - '10001:10001'
     environment:
-    - LOCKBOX_API_KEY=YOUR_LOCKBOX_API_KEY
+    - 'LOCKBOX_API_KEY=YOUR_LOCKBOX_API_KEY'
     - 'LOCKBOX_API_URL=http://lockbox:12000'
     - LOCKBOX_BOX_NAME=operations-service
     - LOCKBOX_ENCRYPTION_KEY=YOUR_LOCKBOX_ENCRYPTION_KEY
@@ -97,7 +97,7 @@ services:
     ports:
       - '11000:11000'
     environment:
-    - LOCKBOX_API_KEY=YOUR_LOCKBOX_API_KEY
+    - 'LOCKBOX_API_KEY=YOUR_LOCKBOX_API_KEY'
     - 'LOCKBOX_API_URL=http://lockbox:12000'
     - LOCKBOX_BOX_NAME=medium-service
     - LOCKBOX_ENCRYPTION_KEY=YOUR_LOCKBOX_ENCRYPTION_KEY
@@ -112,7 +112,7 @@ services:
     ports:
       - '10006:10006'
     environment:
-    - LOCKBOX_API_KEY=YOUR_LOCKBOX_API_KEY
+    - 'LOCKBOX_API_KEY=YOUR_LOCKBOX_API_KEY'
     - 'LOCKBOX_API_URL=http://lockbox:12000'
     - LOCKBOX_BOX_NAME=mailing-service
     - LOCKBOX_ENCRYPTION_KEY=YOUR_LOCKBOX_ENCRYPTION_KEY
@@ -127,7 +127,7 @@ services:
     ports:
       - '10005:10005'    
     environment:
-    - LOCKBOX_API_KEY=YOUR_LOCKBOX_API_KEY
+    - 'LOCKBOX_API_KEY=YOUR_LOCKBOX_API_KEY'
     - 'LOCKBOX_API_URL=http://lockbox:12000'
     - LOCKBOX_BOX_NAME=notifications-service
     - LOCKBOX_ENCRYPTION_KEY=YOUR_LOCKBOX_ENCRYPTION_KEY
@@ -142,7 +142,7 @@ services:
     ports:
       - '10004:10004'  
     environment:
-    - LOCKBOX_API_KEY=YOUR_LOCKBOX_API_KEY
+    - 'LOCKBOX_API_KEY=YOUR_LOCKBOX_API_KEY'
     - 'LOCKBOX_API_URL=http://lockbox:12000'
     - LOCKBOX_BOX_NAME=statistics-service
     - LOCKBOX_ENCRYPTION_KEY=YOUR_LOCKBOX_ENCRYPTION_KEY
@@ -165,7 +165,7 @@ services:
     ports:
       - '11001:11001'
     environment:
-    - LOCKBOX_API_KEY=YOUR_LOCKBOX_API_KEY
+    - 'LOCKBOX_API_KEY=YOUR_LOCKBOX_API_KEY'
     - 'LOCKBOX_API_URL=http://lockbox:12000'
     - LOCKBOX_BOX_NAME=supervisor-service
     - LOCKBOX_ENCRYPTION_KEY=YOUR_LOCKBOX_ENCRYPTION_KEY
@@ -179,7 +179,7 @@ services:
     ports:
       - '9050:9050'
     environment:
-    - LOCKBOX_API_KEY=YOUR_LOCKBOX_API_KEY
+    - 'LOCKBOX_API_KEY=YOUR_LOCKBOX_API_KEY'
     - 'LOCKBOX_API_URL=http://lockbox:12000'
     - LOCKBOX_BOX_NAME=websockets-service
     - LOCKBOX_ENCRYPTION_KEY=YOUR_LOCKBOX_ENCRYPTION_KEY

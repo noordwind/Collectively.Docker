@@ -1,21 +1,11 @@
 version: "2"
 
 services:
-  start-dependencies:
-    image: dadarek/wait-for-dependencies
-    depends_on:
-      - mongo
-      - rabbitmq
-    command: rabbitmq:5672
-
   api:
     image: noordwind/collectively.api
     links:
-      - rabbitmq
       - lockbox
       - storage-service
-    ports:
-      - '5000:5000'
     environment:
     - 'LOCKBOX_API_KEY=YOUR_LOCKBOX_API_KEY'
     - 'LOCKBOX_API_URL=http://lockbox:12000'
@@ -26,16 +16,12 @@ services:
   storage-service:
     image: noordwind/collectively.services.storage
     links:
-      - mongo
-      - rabbitmq
       - lockbox
       - users-service
       - remarks-service
       - operations-service
       - statistics-service
       - notifications-service
-    ports:
-      - '10000:10000'  
     environment:
     - 'LOCKBOX_API_KEY=YOUR_LOCKBOX_API_KEY'
     - 'LOCKBOX_API_URL=http://lockbox:12000'
@@ -46,11 +32,7 @@ services:
   users-service:
     image: noordwind/collectively.services.users
     links:
-      - mongo
-      - rabbitmq
       - lockbox
-    ports:
-      - '10002:10002'
     environment:
     - 'LOCKBOX_API_KEY=YOUR_LOCKBOX_API_KEY'
     - 'LOCKBOX_API_URL=http://lockbox:12000'
@@ -61,11 +43,7 @@ services:
   remarks-service:
     image: noordwind/collectively.services.remarks
     links:
-      - mongo
-      - rabbitmq
       - lockbox
-    ports:
-      - '10003:10003'    
     environment:
     - 'LOCKBOX_API_KEY=YOUR_LOCKBOX_API_KEY'
     - 'LOCKBOX_API_URL=http://lockbox:12000'
@@ -76,11 +54,7 @@ services:
   operations-service:
     image: noordwind/collectively.services.operations
     links:
-      - mongo
-      - rabbitmq
       - lockbox
-    ports:
-      - '10001:10001'
     environment:
     - 'LOCKBOX_API_KEY=YOUR_LOCKBOX_API_KEY'
     - 'LOCKBOX_API_URL=http://lockbox:12000'
@@ -91,11 +65,7 @@ services:
   medium-service:
     image: noordwind/collectively.services.medium
     links:
-      - mongo
-      - rabbitmq
       - lockbox
-    ports:
-      - '11000:11000'
     environment:
     - 'LOCKBOX_API_KEY=YOUR_LOCKBOX_API_KEY'
     - 'LOCKBOX_API_URL=http://lockbox:12000'
@@ -106,11 +76,7 @@ services:
   mailing-service:
     image: noordwind/collectively.services.mailing
     links:
-      - mongo
-      - rabbitmq
       - lockbox
-    ports:
-      - '10006:10006'
     environment:
     - 'LOCKBOX_API_KEY=YOUR_LOCKBOX_API_KEY'
     - 'LOCKBOX_API_URL=http://lockbox:12000'
@@ -121,11 +87,7 @@ services:
   notifications-service:
     image: noordwind/collectively.services.notifications
     links:
-      - mongo
-      - rabbitmq
       - lockbox
-    ports:
-      - '10005:10005'    
     environment:
     - 'LOCKBOX_API_KEY=YOUR_LOCKBOX_API_KEY'
     - 'LOCKBOX_API_URL=http://lockbox:12000'
@@ -136,11 +98,7 @@ services:
   statistics-service:
     image: noordwind/collectively.services.statistics
     links:
-      - mongo
-      - rabbitmq
       - lockbox
-    ports:
-      - '10004:10004'  
     environment:
     - 'LOCKBOX_API_KEY=YOUR_LOCKBOX_API_KEY'
     - 'LOCKBOX_API_URL=http://lockbox:12000'
@@ -151,8 +109,6 @@ services:
   supervisor-service:
     image: noordwind/collectively.services.supervisor
     links:
-      - mongo
-      - rabbitmq
       - lockbox
       - api
       - mailing-service
@@ -164,8 +120,6 @@ services:
       - storage-service
       - users-service
       - websockets-service
-    ports:
-      - '11001:11001'
     environment:
     - 'LOCKBOX_API_KEY=YOUR_LOCKBOX_API_KEY'
     - 'LOCKBOX_API_URL=http://lockbox:12000'
@@ -176,10 +130,7 @@ services:
   websockets-service:
     image: noordwind/collectively.services.websockets
     links:
-      - rabbitmq
       - lockbox
-    ports:
-      - '9050:9050'
     environment:
     - 'LOCKBOX_API_KEY=YOUR_LOCKBOX_API_KEY'
     - 'LOCKBOX_API_URL=http://lockbox:12000'
@@ -189,33 +140,11 @@ services:
 
   web:
     image: noordwind/collectively.web
-    links:
-      - api
-      - websockets-service
-    ports:
-      - '9000:9000'
 
   lockbox:
     image: lockbox/lockbox.server
-    links:
-      - mongo
-    ports:
-      - '12000:12000'
     environment:
       - 'ASPNETCORE_URLS=http://*:12000'
-      - 'LOCKBOX_MONGO_CONNECTION_STRING=mongodb://mongo:27017/Lockbox'
+      - 'LOCKBOX_MONGO_CONNECTION_STRING=mongodb://MONGO_HOST:27017/Lockbox'
       - 'LOCKBOX_MONGO_DATABASE=Lockbox'
       - 'LOCKBOX_SECRET_KEY=YOUR_LOCKBOX_SECRET_KEY'
-
-  mongo:
-    image: mongo
-    volumes:
-      - /data/db
-    ports:
-      - '27017:27017'
-
-  rabbitmq:
-    image: rabbitmq:3.6.5-management
-    ports:
-      - '5672:5672'
-      - '15672:15672'
