@@ -12,6 +12,7 @@ services:
     build: ./Collectively.Api/src/Collectively.Api
     links:
       - rabbitmq
+      - redis
       - storage-service
     ports:
       - '5000:5000'
@@ -21,6 +22,7 @@ services:
     links:
       - mongo
       - rabbitmq
+      - redis
       - users-service
       - remarks-service
       - operations-service
@@ -120,3 +122,8 @@ services:
     ports:
       - '5672:5672'
       - '15672:15672'
+
+  redis:
+    image: redis
+    ports:
+      - '6379:6379'
