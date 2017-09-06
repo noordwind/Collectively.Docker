@@ -6,6 +6,6 @@ do
 	 echo Restoring packages for repository: $REPOSITORY
 	 echo ========================================================
      cd $REPOSITORY
-	 dotnet restore --source https://api.nuget.org/v3/index.json --source https://www.myget.org/F/collectively-dev/api/v3/index.json --no-cache
+	 dotnet restore --source https://api.nuget.org/v3/index.json --source https://www.myget.org/F/collectively-dev/api/v3/index.json --source https://www.myget.org/F/imagesharp/api/v3/index.json --no-cache
      cd ..
 done

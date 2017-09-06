@@ -6,6 +6,6 @@ do
 	 echo Building repository: $REPOSITORY
 	 echo ========================================================
      cd $REPOSITORY
-     dotnet build
+     dotnet build --no-restore
      cd ..
 done    
