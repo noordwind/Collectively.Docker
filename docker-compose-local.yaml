@@ -17,6 +17,15 @@ services:
     ports:
       - '5000:5000'
 
+  signalr-service:
+    build: ./Collectively.Services.SignalR/src/Collectively.Services.SignalR
+    links:
+      - mongo
+      - rabbitmq
+      - remarks-service
+    ports:
+      - '10010:10010'  
+
   storage-service:
     build: ./Collectively.Services.Storage/src/Collectively.Services.Storage
     links:
@@ -99,22 +108,16 @@ services:
       - remarks-service
       - statistics-service
       - storage-service
+      - signalr-service
       - users-service
     ports:
       - '11001:11001'
-
-  websockets-service:
-    build: ./Collectively.Services.Websockets/src
-    links:
-      - rabbitmq
-    ports:
-      - '9050:9050'
 
   web:
     build: ./Collectively.Web
     links:
       - api
-      - websockets-service
+      - signalr-service
     ports:
       - '9000:9000'
 

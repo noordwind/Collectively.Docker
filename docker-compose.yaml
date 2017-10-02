@@ -23,6 +23,21 @@ services:
     - 'LOCKBOX_ENCRYPTION_KEY=YOUR_LOCKBOX_ENCRYPTION_KEY'
     - 'LOCKBOX_ENTRY_KEY=appsettings'
 
+  signalr-service:
+    image: noordwind/collectively.services.signalr
+    links:
+      - rabbitmq
+      - lockbox
+      - remarks-service
+    ports:
+      - '10010:10010'  
+    environment:
+    - 'LOCKBOX_API_KEY=YOUR_LOCKBOX_API_KEY'
+    - 'LOCKBOX_API_URL=http://lockbox:12000'
+    - 'LOCKBOX_BOX_NAME=signalr-service'
+    - 'LOCKBOX_ENCRYPTION_KEY=YOUR_LOCKBOX_ENCRYPTION_KEY'
+    - 'LOCKBOX_ENTRY_KEY=appsettings'
+
   storage-service:
     image: noordwind/collectively.services.storage
     links:
@@ -162,8 +177,8 @@ services:
       - remarks-service
       - statistics-service
       - storage-service
+      - signalr-service
       - users-service
-      - websockets-service
     ports:
       - '11001:11001'
     environment:
@@ -173,25 +188,11 @@ services:
     - 'LOCKBOX_ENCRYPTION_KEY=YOUR_LOCKBOX_ENCRYPTION_KEY'
     - 'LOCKBOX_ENTRY_KEY=appsettings'
 
-  websockets-service:
-    image: noordwind/collectively.services.websockets
-    links:
-      - rabbitmq
-      - lockbox
-    ports:
-      - '9050:9050'
-    environment:
-    - 'LOCKBOX_API_KEY=YOUR_LOCKBOX_API_KEY'
-    - 'LOCKBOX_API_URL=http://lockbox:12000'
-    - 'LOCKBOX_BOX_NAME=websockets-service'
-    - 'LOCKBOX_ENCRYPTION_KEY=YOUR_LOCKBOX_ENCRYPTION_KEY'
-    - 'LOCKBOX_ENTRY_KEY=appsettings'
-
   web:
     image: noordwind/collectively.web
     links:
       - api
-      - websockets-service
+      - signalr-service
     ports:
       - '9000:9000'
 
